@@ -39,3 +39,8 @@ config.sub*
 config.guess*
 bindings/java/${dist}
 bindings/python/build
+obj/
+debug/
+*.ncb
+*.user
+*.suo

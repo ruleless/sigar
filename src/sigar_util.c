@@ -46,7 +46,7 @@ SIGAR_INLINE char *sigar_uitoa(char *buf, unsigned int n, int *len)
     return start;
 }
 
-SIGAR_INLINE char *sigar_skip_line(char *buffer, int buflen)
+char *sigar_skip_line(char *buffer, int buflen)
 {
     char *ptr = buflen ?
         (char *)memchr(buffer, '\n', buflen) : /* bleh */
@@ -54,17 +54,17 @@ SIGAR_INLINE char *sigar_skip_line(char *buffer, int buflen)
     return ++ptr;
 }
 
-SIGAR_INLINE char *sigar_skip_token(char *p)
+char *sigar_skip_token(char *p)
 {
     while (sigar_isspace(*p)) p++;
     while (*p && !sigar_isspace(*p)) p++;
     return p;
 }
 
-SIGAR_INLINE char *sigar_skip_multiple_token(char *p, int count)
+char *sigar_skip_multiple_token(char *p, int count)
 {
     int i;
-    
+
     for (i = 0; i < count; i++) {
         p = sigar_skip_token(p);
     }
@@ -463,7 +463,7 @@ sigar_iodev_t *sigar_iodev_get(sigar_t *sigar,
 double sigar_file_system_usage_calc_used(sigar_t *sigar,
                                          sigar_file_system_usage_t *fsusage)
 {
-    /* 
+    /*
      * win32 will not convert __uint64 to double.
      * convert to KB then do unsigned long -> double.
      */
@@ -698,7 +698,7 @@ void sigar_cpu_model_adjust(sigar_t *sigar, sigar_cpu_info_t *info)
 /* attempt to derive MHz from model name
  * currently works for certain intel strings
  * see exp/intel_amd_cpu_models.txt
- */ 
+ */
 int sigar_cpu_mhz_from_model(char *model)
 {
     int mhz = SIGAR_FIELD_NOTIMPL;
@@ -788,7 +788,7 @@ SIGAR_DECLARE(int) sigar_rpc_ping(char *host,
     int sock;
     struct timeval timeout;
     unsigned short port = 0;
-    enum clnt_stat rpc_stat; 
+    enum clnt_stat rpc_stat;
 
     rpc_stat = get_sockaddr(&addr, host);
     if (rpc_stat != RPC_SUCCESS) {
@@ -799,7 +799,7 @@ SIGAR_DECLARE(int) sigar_rpc_ping(char *host,
     timeout.tv_usec = 0;
     addr.sin_port = htons(port);
     sock = RPC_ANYSOCK;
-    
+
     if (protocol == SIGAR_NETCONN_UDP) {
         client =
             clntudp_create(&addr, program, version,
@@ -961,7 +961,7 @@ int sigar_dlinfo_modules(sigar_t *sigar, sigar_proc_modules_t *procmods)
     }
 
     do {
-        int status = 
+        int status =
             procmods->module_getter(procmods->data,
                                     (char *)map->l_name,
                                     strlen(map->l_name));

@@ -2,4 +2,4 @@ TOPDIR:=../..
 
 dirs:=linux
 
-include $(TOPDIR)/common.mak
+include $(TOPDIR)/build.mak

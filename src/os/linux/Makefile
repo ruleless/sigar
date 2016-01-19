@@ -1,8 +1,8 @@
-TOPDIR:=../../..
+phonyt:=objt
 
-phonyt:=obj
+TOPDIR:=../../..
 
 CFLAGS:=-I $(TOPDIR)/include -I ../..
 LDFLAGS:=
 
-include $(TOPDIR)/common.mak
+include $(TOPDIR)/build.mak

@@ -1,3 +1,3 @@
-dirs:=src
+dirs:=src build
 
-include ./common.mak
+include ./build.mak
